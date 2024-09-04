@@ -7,7 +7,8 @@ namespace SuperShop.Data
 
     {   
         
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; } // entidade responsavel pela criaçao da tabela Products atraves da EntityFrameworkCore
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
             
