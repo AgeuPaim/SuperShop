@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SuperShop.Data.Entities
+namespace SuperShop.Data.Entities // estou no 7
 {
     public class Product
     {

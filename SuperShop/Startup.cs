@@ -27,7 +27,13 @@ namespace SuperShop
 
             });
 
+            //This service allows you to create the object only once. After creation,
+            //it cannot be created again in another location
             services.AddTransient<SeedDb>();
+
+
+            //This service creates a new object by always removing the previous one, preventing duplications.
+            services.AddScoped<IRepository,Repository>(); 
 
             services.AddControllersWithViews();
         }
