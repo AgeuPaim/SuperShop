@@ -2,9 +2,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SuperShop.Data.Entities // estou no 7
+namespace SuperShop.Data.Entities 
 {
-    public class Product
+    public class Product:IEntity
     {
         public int Id { get; set; }
 

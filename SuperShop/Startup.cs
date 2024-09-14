@@ -33,7 +33,7 @@ namespace SuperShop
 
 
             //This service creates a new object by always removing the previous one, preventing duplications.
-            services.AddScoped<IRepository,Repository>(); 
+            services.AddScoped<IProductRepository,ProductRepository>(); 
 
             services.AddControllersWithViews();
         }
@@ -45,7 +45,7 @@ namespace SuperShop
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            else  
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
