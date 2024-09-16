@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperShop.Data;
+using SuperShop.Data.Entities;
+using SuperShop.Helpers;
 
 namespace SuperShop
 {
@@ -20,6 +23,24 @@ namespace SuperShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(cfg =>
+
+            {
+
+                cfg.User.RequireUniqueEmail = true;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequiredUniqueChars = 0;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequiredLength = 0;
+
+            })
+
+            .AddEntityFrameworkStores<DataContext>();
+
+
+
             services.AddDbContext<DataContext>(cfg =>
 
             {
@@ -33,7 +54,9 @@ namespace SuperShop
 
 
             //This service creates a new object by always removing the previous one, preventing duplications.
-            services.AddScoped<IProductRepository,ProductRepository>(); 
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IUserHelper, UserHelper>();
 
             services.AddControllersWithViews();
         }
@@ -45,7 +68,7 @@ namespace SuperShop
             {
                 app.UseDeveloperExceptionPage();
             }
-            else  
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -55,6 +78,8 @@ namespace SuperShop
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
