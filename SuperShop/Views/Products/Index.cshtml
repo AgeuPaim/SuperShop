@@ -19,9 +19,6 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LastPurchase)
             </th>
             <th>
@@ -31,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.IsAvalible)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.stock)
+                @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th></th>
         </tr>
@@ -46,7 +43,11 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:100px;height:150px;max-width:100%;height:auto" >
+                        
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastPurchase)
@@ -58,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.IsAvalible)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.stock)
+                @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
